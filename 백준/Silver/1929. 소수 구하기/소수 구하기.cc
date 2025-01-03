@@ -3,7 +3,7 @@
 #include<cmath>
 using namespace std;
 
-int check_sosu(unsigned int s) {
+int check_sosu(int s) {
     if (s == 1) return 0; // 1은 소수가 아님
     else if (s == 2 || s == 3) return 1; // 2, 3은 소수
     else if (s % 2 == 0 || s % 3 == 0) return 0; // 2와 3으로 나누어 떨어지면 소수 아님.
@@ -18,8 +18,15 @@ int main(void) {
     cin >> start >> end; // 소수 판별할 기준 지정
 
     while (start <= end) {
-        if (check_sosu(start)) cout << start << endl;
-        start++;
+        if (check_sosu(start)) {
+            cout << start << endl;
+        }
+        if (start >= 5) {
+            if (start % 6 == 1) start += 4;
+            else if (start % 6 == 5) start += 2;
+            else start += 1;
+        }
+        else start += 1;
     }
     return 0;
 }
