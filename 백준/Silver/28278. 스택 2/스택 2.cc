@@ -1,33 +1,28 @@
 #include <iostream>
+#include <cmath>
 #include <vector>
 using namespace std;
 struct stack {
-	int* arr;
+	vector<int> arr;
 	int last;
-
-	void init(int n) {
-		arr = new int[n];
-		last = -1;
-	}
-	~stack() {
-		delete[] arr;
-	}
 	void push(int data) {
-		arr[++last] = data;
+		arr.push_back(data);
 	}
 	int pop(void) {
 		if (empty()) return -1;
-		return arr[last--];
+		last = arr[arr.size() - 1];
+		arr.pop_back();
+		return last;
 	}
 	int size(void) {
-		return last + 1;
+		return arr.size();
 	}
 	bool empty(void) {
-		return (last < 0);
+		return (arr.size() < 1);
 	}
 	int top(void) {
 		if (empty()) return -1;
-		return arr[last];
+		return arr[arr.size() - 1];
 	}
 
 };
@@ -38,7 +33,6 @@ int main(void) {
 	int n;
 	cin >> n;
 	stack s;
-	s.init(n);
 	for (; n--;) { // n--를 수행하고 0이면 종료
 		int proc, x;
 		cin >> proc;
